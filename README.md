@@ -10,7 +10,7 @@ without notice.
 Requires Python 3.10+ and `requests`.
 
 ```bash
-cp .env.example .env   # fill in INSTANTON_USER / INSTANTON_PASS
+cp .env.example .env   # fill in INSTANTON_USER / INSTANTON_PASS (INSTANTONUSERNAME / INSTANTONPASSWORD also accepted)
 ```
 
 Use a dedicated read-only portal account **without MFA** — the scripted login
@@ -24,5 +24,6 @@ cannot answer an MFA challenge.
 ./instanton.py --endpoint inventory    # dump one endpoint (optionally --site <id>)
 ```
 
-Exit code is 1 when any device is not up or there are active alerts, so it can
+Exit code is 1 when the site health is not "good", any device is not up, or there
+are active alerts, so it can
 be used from cron or Nagios-style checks.

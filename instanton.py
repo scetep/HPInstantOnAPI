@@ -15,7 +15,7 @@ The account used must NOT have MFA enabled. Create a dedicated read-only
 ("viewer") account in the Instant On portal for this.
 
 Credentials come from the environment (or a .env file next to this script):
-  INSTANTON_USER, INSTANTON_PASS
+  INSTANTON_USER, INSTANTON_PASS  (or INSTANTONUSERNAME, INSTANTONPASSWORD)
 
 Usage:
   ./instanton.py                 # collect everything, write JSON under ./output/<timestamp>/
@@ -59,6 +59,8 @@ SITE_ENDPOINTS = [
     "administration",
     "timezone",
     "maintenance",
+    "systemHealth",
+    "events",
 ]
 
 
@@ -276,43 +278,66 @@ def summarize_site(data: dict) -> dict:
             "ip": _first(dev, "ipAddress", "ip"),
             "mac": _first(dev, "macAddress", "mac"),
             "serial": _first(dev, "serialNumber", "serial"),
-            "firmware": _first(dev, "osVersion", "firmwareVersion", "softwareVersion"),
+            "health": _first(dev, "health"),
+            "firmware": _first(dev, "currentFirmwareVersion", "deviceSoftwareVersion", "firmwareVersion"),
+            "up_to_date": _first(dev, "isUpToDate"),
             "uptime_s": _first(dev, "uptimeInSeconds", "uptime"),
         })
 
     online_words = {"up", "online", "connected", "ok"}
     offline = [d for d in devices if str(d["status"]).lower() not in online_words]
 
-    clients = _elements(eps.get("clientSummary"))
+    # clientSummary also lists recently-seen clients; only status "up" are connected.
+    clients = [c for c in _elements(eps.get("clientSummary")) if c.get("status") == "up"]
     wireless = [c for c in clients if c.get("wirelessNetworkId")]
-    alerts = _elements(eps.get("alerts"))
-    active_alerts = [a for a in alerts if not _first(a, "resolvedTime", "clearedTime", "isResolved")]
+
+    # The /alerts list comes back empty even when alerts are active (e.g. watchlist
+    # alerts), so the site record's counters are the source of truth.
+    counters = site.get("activeAlertsCounters") or {}
+    latest = site.get("latestActiveAlert") or {}
+    latest_props = latest.get("alertTypeProperties") or {}
 
     return {
         "site_id": site.get("id"),
         "site_name": site.get("name"),
         "site_health": _first(site, "health", "healthStatus", "status"),
+        "site_health_reason": site.get("healthReason"),
+        "site_health_score": (site.get("currentHealthScore") or {}).get("score"),
         "devices_total": len(devices),
         "devices_not_up": len(offline),
         "devices": devices,
         "clients_total": len(clients),
         "clients_wireless": len(wireless),
         "clients_wired": len(clients) - len(wireless),
-        "alerts_total": len(alerts),
-        "alerts_active": len(active_alerts),
+        "alerts_active": site.get("activeAlertsCount", 0),
+        "alerts_major": counters.get("activeMajorAlertsCount", 0),
+        "alerts_minor": counters.get("activeMinorAlertsCount", 0),
+        "alerts_info": counters.get("activeInfoAlertsCount", 0),
+        "latest_active_alert": {
+            "type": latest.get("type"),
+            "severity": latest.get("severity"),
+            "raised": latest.get("raisedTime"),
+            "subject": _first(latest_props, "clientName", "deviceNames", "wanName", "stackName", "network"),
+        } if latest else None,
         "endpoint_errors": data["errors"],
     }
 
 
 def print_summary(summaries: list[dict]) -> None:
     for s in summaries:
-        print(f"\n=== {s['site_name']}  ({s['site_id']})  health={s['site_health']}")
+        print(f"\n=== {s['site_name']}  ({s['site_id']})  health={s['site_health']} "
+              f"({s['site_health_reason']}, score {s['site_health_score']})")
         print(f"  Devices: {s['devices_total']} total, {s['devices_not_up']} not up")
         for d in s["devices"]:
-            print(f"    - {str(d['name']):<24} {str(d['model']):<16} {str(d['status']):<10} "
-                  f"{str(d['ip']):<16} fw={d['firmware']}")
+            fw = f"{d['firmware']}{'' if d['up_to_date'] in (True, None) else ' (update available)'}"
+            print(f"    - {str(d['name']):<28} {str(d['model']):<9} {str(d['status']):<5} "
+                  f"{str(d['health']):<8} {str(d['ip']):<15} fw={fw}")
         print(f"  Clients: {s['clients_total']} ({s['clients_wireless']} wireless, {s['clients_wired']} wired)")
-        print(f"  Alerts:  {s['alerts_total']} total, {s['alerts_active']} active")
+        print(f"  Alerts:  {s['alerts_active']} active "
+              f"({s['alerts_major']} major, {s['alerts_minor']} minor, {s['alerts_info']} info)")
+        if a := s["latest_active_alert"]:
+            raised = datetime.fromtimestamp(a["raised"]).strftime("%Y-%m-%d %H:%M") if a["raised"] else "?"
+            print(f"    latest: [{a['severity']}] {a['type']} - {a['subject']} (since {raised})")
         if s["endpoint_errors"]:
             print(f"  Endpoint errors: {s['endpoint_errors']}")
 
@@ -329,7 +354,8 @@ def main() -> int:
     args = ap.parse_args()
 
     _load_dotenv(SCRIPT_DIR / ".env")
-    user, pw = os.environ.get("INSTANTON_USER"), os.environ.get("INSTANTON_PASS")
+    user = os.environ.get("INSTANTON_USER") or os.environ.get("INSTANTONUSERNAME")
+    pw = os.environ.get("INSTANTON_PASS") or os.environ.get("INSTANTONPASSWORD")
     if not user or not pw:
         print("Set INSTANTON_USER and INSTANTON_PASS (env or .env file).", file=sys.stderr)
         return 2
@@ -369,7 +395,10 @@ def main() -> int:
         print_summary(summaries)
 
     # Non-zero exit when something looks wrong -> usable from cron / Nagios-style checks.
-    unhealthy = any(s["devices_not_up"] or s["alerts_active"] for s in summaries)
+    unhealthy = any(
+        s["devices_not_up"] or s["alerts_active"] or s["site_health"] not in ("good", None)
+        for s in summaries
+    )
     return 1 if unhealthy else 0
 
 
