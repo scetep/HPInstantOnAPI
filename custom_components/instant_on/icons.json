@@ -1,0 +1,33 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "port_link": { "default": "mdi:ethernet", "state": { "off": "mdi:ethernet-off" } }
+    },
+    "sensor": {
+      "site_health": { "default": "mdi:heart-pulse" },
+      "site_health_score": { "default": "mdi:gauge" },
+      "site_active_alerts": { "default": "mdi:alert-circle-outline" },
+      "site_devices_online": { "default": "mdi:router-network" },
+      "site_clients_online": { "default": "mdi:devices" },
+      "site_wireless_clients": { "default": "mdi:wifi" },
+      "site_wired_clients": { "default": "mdi:ethernet-cable" },
+      "site_throughput": { "default": "mdi:speedometer" },
+      "site_data_24h": { "default": "mdi:database-arrow-down" },
+      "site_networks_active": { "default": "mdi:lan" },
+      "device_health": { "default": "mdi:heart-pulse" },
+      "device_ip_address": { "default": "mdi:ip-network" },
+      "device_wireless_clients": { "default": "mdi:wifi" },
+      "device_wired_clients": { "default": "mdi:ethernet-cable" },
+      "radio_utilization": { "default": "mdi:access-point" },
+      "radio_clients": { "default": "mdi:access-point-network" },
+      "radio_channel": { "default": "mdi:radio-tower" },
+      "port_downstream_data": { "default": "mdi:download-network" },
+      "port_upstream_data": { "default": "mdi:upload-network" },
+      "port_downstream_throughput": { "default": "mdi:download" },
+      "port_upstream_throughput": { "default": "mdi:upload" }
+    }
+  },
+  "services": {
+    "lookup_mac": { "service": "mdi:magnify" }
+  }
+}

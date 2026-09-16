@@ -1,0 +1,23 @@
+{
+  "domain": "instant_on",
+  "name": "HPE Aruba Networking Instant On (Unofficial)",
+  "codeowners": [
+    "@scetep"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "frontend",
+    "http",
+    "panel_custom",
+    "websocket_api"
+  ],
+  "documentation": "https://github.com/scetep/HPInstantOnAPI",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/scetep/HPInstantOnAPI/issues",
+  "loggers": [
+    "custom_components.instant_on"
+  ],
+  "requirements": [],
+  "version": "0.1.0"
+}

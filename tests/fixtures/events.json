@@ -1,0 +1,681 @@
+{
+  "kind": "events",
+  "elements": [
+    {
+      "kind": "event",
+      "id": "7d0d499e-a8cb-4262-821e-f4eb9150a8d0",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789594819,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 5",
+          "valueEnum": null,
+          "id": "02:ad:e2:9a:f0:ae"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "972f2026-6e3f-4fb5-8d72-85f62cd6bbc3",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789594514,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 4",
+          "valueEnum": null,
+          "id": "02:16:42:c6:d5:11"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "dd50e97d-21dd-49f6-8bef-607415807233",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789594417,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 5",
+          "valueEnum": null,
+          "id": "02:ad:e2:9a:f0:ae"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "ccf12874-8434-472a-8448-808168fe94a9",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789593817,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 5",
+          "valueEnum": null,
+          "id": "02:ad:e2:9a:f0:ae"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "039cf64a-f0fd-4ec6-8e73-bc44e98299ff",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789593241,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 4",
+          "valueEnum": null,
+          "id": "02:16:42:c6:d5:11"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "de1cbb03-a691-4455-88ea-02d7dfefa165",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789592621,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 4",
+          "valueEnum": null,
+          "id": "02:16:42:c6:d5:11"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "a68ccfd6-b85a-4296-8678-ccdf820fcbd0",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789592321,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 5",
+          "valueEnum": null,
+          "id": "02:ad:e2:9a:f0:ae"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "8d827027-adf1-4594-885f-e1fc5b1460fa",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789591794,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 5",
+          "valueEnum": null,
+          "id": "02:ad:e2:9a:f0:ae"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "31896a75-508f-4b10-8c21-529dd95783a6",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789591794,
+      "source": {
+        "id": "02:99:19:0d:be:88",
+        "name": "Client 46"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 2",
+          "valueEnum": null,
+          "id": "51a08f7b-8aa8-42dc-8791-03272a437c45"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 3",
+          "valueEnum": null,
+          "id": "02:0e:4e:af:2a:a1"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "649c606c-23c7-41e4-860e-6874b8671f39",
+      "event": "managementAccountVerified",
+      "state": "success",
+      "category": "site",
+      "occurrenceTime": 1789591793,
+      "source": {
+        "id": "133db9f8-c38f-4c14-803c-f4ce9eacb980",
+        "name": "Test Site"
+      },
+      "type": "user",
+      "account": "user@example.com",
+      "attributes": []
+    },
+    {
+      "kind": "event",
+      "id": "e9ac4a28-0109-4438-8b47-6688240cf326",
+      "event": "managementAccountAdded",
+      "state": "success",
+      "category": "site",
+      "occurrenceTime": 1789591510,
+      "source": {
+        "id": "b6313f0f-b07d-46bc-827f-7bd5666ad6d4",
+        "name": "Test Site"
+      },
+      "type": "user",
+      "account": "user@example.com",
+      "attributes": [
+        {
+          "key": "added",
+          "valueStr": "user@example.com",
+          "valueEnum": null,
+          "id": null
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "94966493-e6f2-4092-82ad-f97d3d1d70f0",
+      "event": "managementAccountRemoved",
+      "state": "success",
+      "category": "site",
+      "occurrenceTime": 1789591495,
+      "source": {
+        "id": "b6313f0f-b07d-46bc-827f-7bd5666ad6d4",
+        "name": "Test Site"
+      },
+      "type": "user",
+      "account": "user@example.com",
+      "attributes": [
+        {
+          "key": "removed",
+          "valueStr": "user@example.com",
+          "valueEnum": null,
+          "id": null
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "6f4dbf88-899b-40c7-814d-97b6576f66d6",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789591458,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 4",
+          "valueEnum": null,
+          "id": "02:16:42:c6:d5:11"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "84344481-ec35-47b1-8473-8414bfa3a0fd",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789591417,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 5",
+          "valueEnum": null,
+          "id": "02:ad:e2:9a:f0:ae"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "a4947c28-2b5b-4c6c-8a1d-4c7825a1262d",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789590817,
+      "source": {
+        "id": "02:99:19:0d:be:88",
+        "name": "Client 46"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 2",
+          "valueEnum": null,
+          "id": "51a08f7b-8aa8-42dc-8791-03272a437c45"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 5",
+          "valueEnum": null,
+          "id": "02:ad:e2:9a:f0:ae"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "dbe896fd-11c8-47ef-80b2-65cdd4418421",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789590817,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 5",
+          "valueEnum": null,
+          "id": "02:ad:e2:9a:f0:ae"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "ef07de3d-d163-429c-804d-dfd26e756a87",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789590817,
+      "source": {
+        "id": "02:99:19:0d:be:88",
+        "name": "Client 46"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 2",
+          "valueEnum": null,
+          "id": "51a08f7b-8aa8-42dc-8791-03272a437c45"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 5",
+          "valueEnum": null,
+          "id": "02:ad:e2:9a:f0:ae"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "c6a87bab-a327-4d57-8885-0f9b3b1c22d8",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789590314,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 4",
+          "valueEnum": null,
+          "id": "02:16:42:c6:d5:11"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "116c8b72-e937-41aa-81dd-245053a800ca",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789589114,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 4",
+          "valueEnum": null,
+          "id": "02:16:42:c6:d5:11"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "a149e775-1c7a-4a9c-8ba4-0556be512216",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789588514,
+      "source": {
+        "id": "02:c0:72:16:4f:39",
+        "name": "Client 26"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 2",
+          "valueEnum": null,
+          "id": "51a08f7b-8aa8-42dc-8791-03272a437c45"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 4",
+          "valueEnum": null,
+          "id": "02:16:42:c6:d5:11"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "9aae260d-bad6-48f6-8296-fbac63dd9467",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789588514,
+      "source": {
+        "id": "02:c0:72:16:4f:39",
+        "name": "Client 26"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 2",
+          "valueEnum": null,
+          "id": "51a08f7b-8aa8-42dc-8791-03272a437c45"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 4",
+          "valueEnum": null,
+          "id": "02:16:42:c6:d5:11"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "c9e77170-6043-466d-8ea3-2bdf11dd8383",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789588417,
+      "source": {
+        "id": "02:9c:b9:15:f0:d6",
+        "name": "Client 33"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 5",
+          "valueEnum": null,
+          "id": "02:ad:e2:9a:f0:ae"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "4d96826f-3ca4-4be2-84c6-d7fd27577f02",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789588021,
+      "source": {
+        "id": "02:c2:1b:c4:be:e7",
+        "name": "Client 23"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 2",
+          "valueEnum": null,
+          "id": "02:e7:dc:1d:c0:c3"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "7f903868-5180-45a2-849a-9f756db4961e",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789588021,
+      "source": {
+        "id": "02:68:22:15:ba:e8",
+        "name": "Client 59"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 2",
+          "valueEnum": null,
+          "id": "02:e7:dc:1d:c0:c3"
+        }
+      ]
+    },
+    {
+      "kind": "event",
+      "id": "8ca21a22-c664-4daf-8d7c-d74fe0e9abe6",
+      "event": "clientConnected",
+      "state": "success",
+      "category": "client",
+      "occurrenceTime": 1789587899,
+      "source": {
+        "id": "02:bc:6e:03:89:8f",
+        "name": "Client 32"
+      },
+      "type": "system",
+      "account": null,
+      "attributes": [
+        {
+          "key": "network",
+          "valueStr": "Network 1",
+          "valueEnum": null,
+          "id": "9d30e0a5-3192-4bf2-8c45-3ef1dc07bdde"
+        },
+        {
+          "key": "device",
+          "valueStr": "AP 6",
+          "valueEnum": null,
+          "id": "02:d5:e3:40:4a:66"
+        }
+      ]
+    }
+  ],
+  "isSoftwareUpdateNeeded": false
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "maintenance",
+  "currentVersion": "3.4.0",
+  "state": "not-in-maintenance",
+  "updatePercentage": 100,
+  "lastUpdateTime": 1784448928,
+  "updateInProgress": false,
+  "totalDeviceToUpdate": 0,
+  "totalDeviceCount": 8,
+  "upToDateDeviceCount": 8,
+  "notUpToDateOnlineDeviceCount": 0,
+  "notUpToDateOfflineDeviceCount": 0,
+  "systemStartUpUpdateAvailable": false,
+  "partialUpdate": false,
+  "newUpdateVersion": null,
+  "changeLogByLocale": null,
+  "updateDelayInDays": 7,
+  "updateExpectedDateTime": "2026-09-20T03:00:00",
+  "updatePostponedEarliestTime": null,
+  "updateScheduleDateTime": null,
+  "updateDeadline": null,
+  "day": "sunday",
+  "startTime": "03:00",
+  "metaData": {
+    "kind": "maintenanceMetaData",
+    "maxUpdateDelayInDays": 28,
+    "minUpdateDelayInDays": 0
+  }
+}

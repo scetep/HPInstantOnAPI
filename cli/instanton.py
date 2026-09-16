@@ -14,14 +14,21 @@ Auth flow (OAuth2 authorization-code + PKCE, same as the portal):
 The account used must NOT have MFA enabled. Create a dedicated read-only
 ("viewer") account in the Instant On portal for this.
 
-Credentials come from the environment (or a .env file next to this script):
+Credentials come from the environment (or a .env file in the repo root or cli/):
   INSTANTON_USER, INSTANTON_PASS  (or INSTANTONUSERNAME, INSTANTONPASSWORD)
 
 Usage:
-  ./instanton.py                 # collect everything, write JSON under ./output/<timestamp>/
+  ./instanton.py                 # collect everything, write JSON under <repo>/output/<timestamp>/
   ./instanton.py --summary-only  # just print the health summary
   ./instanton.py --json          # print the summary as JSON (for monitoring tools)
   ./instanton.py --endpoint inventory --site <id>   # dump a single endpoint
+
+Each full run writes to <repo>/output/<timestamp>/ (and points output/latest at it):
+  status.md        health overview with Mermaid topology and charts
+  full-report.md   everything the API returned, rendered per section
+  summary.json     the monitoring summary
+  <site-id>/*.json raw endpoint responses
+Secrets (Wi-Fi keys etc.) are redacted everywhere unless --show-secrets is given.
 """
 
 from __future__ import annotations
@@ -34,15 +41,17 @@ import os
 import secrets
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
+import report
 import requests
 
 PORTAL = "https://portal.instant-on.hpe.com"
 API_VERSION = "7"
 SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_DIR = SCRIPT_DIR.parent
 TOKEN_CACHE = Path(os.environ.get("XDG_CACHE_HOME", Path.home() / ".cache")) / "instanton" / "token.json"
 
 # Per-site endpoints known from the portal / community scripts.
@@ -348,12 +357,14 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Pull data from the Instant On cloud API")
     ap.add_argument("--site", help="only this site id")
     ap.add_argument("--endpoint", help="dump a single endpoint (e.g. inventory) as JSON")
-    ap.add_argument("--output", default=str(SCRIPT_DIR / "output"), help="directory for raw JSON dumps")
-    ap.add_argument("--summary-only", action="store_true", help="don't write raw JSON files")
+    ap.add_argument("--output", default=str(REPO_DIR / "output"), help="directory for reports and raw JSON")
+    ap.add_argument("--summary-only", action="store_true", help="don't write any files")
+    ap.add_argument("--show-secrets", action="store_true", help="don't redact Wi-Fi keys/passwords in output files")
     ap.add_argument("--json", action="store_true", help="print summary as JSON")
     args = ap.parse_args()
 
     _load_dotenv(SCRIPT_DIR / ".env")
+    _load_dotenv(REPO_DIR / ".env")
     user = os.environ.get("INSTANTON_USER") or os.environ.get("INSTANTONUSERNAME")
     pw = os.environ.get("INSTANTON_PASS") or os.environ.get("INSTANTONPASSWORD")
     if not user or not pw:
@@ -370,24 +381,34 @@ def main() -> int:
 
     if args.endpoint:
         out = {s["id"]: client.get_json(f"sites/{s['id']}/{args.endpoint}") for s in sites}
+        if not args.show_secrets:
+            out = report.redact(out)
         print(json.dumps(out, indent=2))
         return 0
 
     raw = [collect_site(client, s, SITE_ENDPOINTS) for s in sites]
+    if not args.show_secrets:
+        raw = report.redact(raw)
     summaries = [summarize_site(d) for d in raw]
 
     if not args.summary_only:
-        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
         outdir = Path(args.output) / stamp
         for d in raw:
             sdir = outdir / d["site"]["id"]
             sdir.mkdir(parents=True, exist_ok=True)
-            (sdir / "site.json").write_text(json.dumps(d["site"], indent=2))
+            (sdir / "site.json").write_text(json.dumps(d["site"], indent=2, ensure_ascii=False))
             for ep, payload in d["endpoints"].items():
-                (sdir / f"{ep}.json").write_text(json.dumps(payload, indent=2))
+                (sdir / f"{ep}.json").write_text(json.dumps(payload, indent=2, ensure_ascii=False))
         (outdir / "summary.json").write_text(json.dumps(summaries, indent=2))
+        (outdir / "status.md").write_text(report.status_report(raw))
+        (outdir / "full-report.md").write_text(report.full_report(raw))
+        latest = Path(args.output) / "latest"
+        if latest.is_symlink() or not latest.exists():
+            latest.unlink(missing_ok=True)
+            latest.symlink_to(stamp, target_is_directory=True)
         if not args.json:
-            print(f"Raw data written to {outdir}")
+            print(f"Reports written to {outdir}/status.md and full-report.md")
 
     if args.json:
         print(json.dumps(summaries, indent=2))
