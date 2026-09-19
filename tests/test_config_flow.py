@@ -152,3 +152,16 @@ async def test_options_flow(hass: HomeAssistant, fake_api, config_entry) -> None
     assert config_entry.options == OPTIONS
     # Reloaded with port sensors enabled.
     assert hass.states.get("sensor.switch_2_port_1_speed") is not None
+
+
+async def test_account_without_sites_aborts_and_revokes(hass: HomeAssistant, fake_api, mock_login) -> None:
+    fake_api.data["sites"] = {"kind": "resourceList", "elements": []}
+    with patch("custom_components.instant_on.api.InstantOnAuth.revoke", autospec=True) as revoke:
+        result = await _start(hass)
+        result = await hass.config_entries.flow.async_configure(
+            result["flow_id"], {"username": USERNAME, "password": "secret"}
+        )
+    assert result["type"] is FlowResultType.ABORT
+    assert result["reason"] == "no_sites"
+    assert result["description_placeholders"] == {"username": USERNAME}
+    assert revoke.call_count == 1

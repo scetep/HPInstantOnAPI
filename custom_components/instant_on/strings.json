@@ -12,7 +12,9 @@
       "otp": {
         "title": "Two-step verification",
         "description": "Enter the 6-digit code from your authenticator app for {username}.",
-        "data": { "otp": "Verification code" }
+        "data": {
+          "otp": "Verification code"
+        }
       },
       "options": {
         "title": "Choose what to import",
@@ -27,7 +29,9 @@
       "reauth_confirm": {
         "title": "Sign in again",
         "description": "The Instant On session for {username} has expired. Enter the password to sign in again (a verification code may follow).",
-        "data": { "password": "[%key:common::config_flow::data::password%]" }
+        "data": {
+          "password": "[%key:common::config_flow::data::password%]"
+        }
       }
     },
     "error": {
@@ -41,7 +45,7 @@
     "abort": {
       "already_configured": "[%key:common::config_flow::abort::already_configured_account%]",
       "reauth_successful": "[%key:common::config_flow::abort::reauth_successful%]",
-      "no_sites": "This account has no Instant On sites."
+      "no_sites": "Signed in as {username}, but this account isn't a member of any Instant On site. In the Instant On portal, invite this account to your site (Site settings → Administration), accept the invitation from the email, then try again. Note that Instant On treats name@gmail.com and na.me@gmail.com as different accounts."
     }
   },
   "options": {
@@ -72,42 +76,106 @@
   },
   "entity": {
     "binary_sensor": {
-      "problem": { "name": "Problem" },
-      "device_online": { "name": "Online" },
-      "device_firmware_outdated": { "name": "Firmware update pending" },
-      "port_link": { "name": "Port {port}" }
+      "problem": {
+        "name": "Problem"
+      },
+      "device_online": {
+        "name": "Online"
+      },
+      "device_firmware_outdated": {
+        "name": "Firmware update pending"
+      },
+      "port_link": {
+        "name": "Port {port}"
+      }
     },
     "sensor": {
-      "site_health": { "name": "Health" },
-      "site_health_score": { "name": "Health score" },
-      "site_active_alerts": { "name": "Active alerts" },
-      "site_devices_online": { "name": "Devices online" },
-      "site_clients_online": { "name": "Clients online" },
-      "site_wireless_clients": { "name": "Wireless clients" },
-      "site_wired_clients": { "name": "Wired clients" },
-      "site_throughput": { "name": "Throughput" },
-      "site_data_24h": { "name": "Data transferred (24h)" },
-      "site_networks_active": { "name": "Active networks" },
-      "device_health": { "name": "Health" },
-      "device_ip_address": { "name": "IP address" },
-      "device_wireless_clients": { "name": "Wireless clients" },
-      "device_wired_clients": { "name": "Wired clients" },
-      "device_poe_consumed": { "name": "PoE power" },
-      "device_poe_budget": { "name": "PoE budget" },
-      "device_last_boot": { "name": "Last boot" },
-      "radio_utilization": { "name": "{band} utilization" },
-      "radio_clients": { "name": "{band} clients" },
-      "radio_channel": { "name": "{band} channel" },
-      "radio_tx_power": { "name": "{band} transmit power" },
-      "port_speed": { "name": "Port {port} speed" },
-      "port_poe_power": { "name": "Port {port} PoE power" },
-      "port_downstream_data": { "name": "Port {port} downstream data" },
-      "port_upstream_data": { "name": "Port {port} upstream data" },
-      "port_downstream_throughput": { "name": "Port {port} downstream throughput" },
-      "port_upstream_throughput": { "name": "Port {port} upstream throughput" }
+      "site_health": {
+        "name": "Health"
+      },
+      "site_health_score": {
+        "name": "Health score"
+      },
+      "site_active_alerts": {
+        "name": "Active alerts"
+      },
+      "site_devices_online": {
+        "name": "Devices online"
+      },
+      "site_clients_online": {
+        "name": "Clients online"
+      },
+      "site_wireless_clients": {
+        "name": "Wireless clients"
+      },
+      "site_wired_clients": {
+        "name": "Wired clients"
+      },
+      "site_throughput": {
+        "name": "Throughput"
+      },
+      "site_data_24h": {
+        "name": "Data transferred (24h)"
+      },
+      "site_networks_active": {
+        "name": "Active networks"
+      },
+      "device_health": {
+        "name": "Health"
+      },
+      "device_ip_address": {
+        "name": "IP address"
+      },
+      "device_wireless_clients": {
+        "name": "Wireless clients"
+      },
+      "device_wired_clients": {
+        "name": "Wired clients"
+      },
+      "device_poe_consumed": {
+        "name": "PoE power"
+      },
+      "device_poe_budget": {
+        "name": "PoE budget"
+      },
+      "device_last_boot": {
+        "name": "Last boot"
+      },
+      "radio_utilization": {
+        "name": "{band} utilization"
+      },
+      "radio_clients": {
+        "name": "{band} clients"
+      },
+      "radio_channel": {
+        "name": "{band} channel"
+      },
+      "radio_tx_power": {
+        "name": "{band} transmit power"
+      },
+      "port_speed": {
+        "name": "Port {port} speed"
+      },
+      "port_poe_power": {
+        "name": "Port {port} PoE power"
+      },
+      "port_downstream_data": {
+        "name": "Port {port} downstream data"
+      },
+      "port_upstream_data": {
+        "name": "Port {port} upstream data"
+      },
+      "port_downstream_throughput": {
+        "name": "Port {port} downstream throughput"
+      },
+      "port_upstream_throughput": {
+        "name": "Port {port} upstream throughput"
+      }
     },
     "update": {
-      "firmware": { "name": "Firmware" }
+      "firmware": {
+        "name": "Firmware"
+      }
     }
   },
   "services": {
@@ -115,7 +183,10 @@
       "name": "Look up MAC address",
       "description": "Finds where a MAC address is connected: access point or switch port, IP address, network and signal.",
       "fields": {
-        "mac": { "name": "MAC address", "description": "MAC address of a client or Instant On device." }
+        "mac": {
+          "name": "MAC address",
+          "description": "MAC address of a client or Instant On device."
+        }
       }
     }
   }

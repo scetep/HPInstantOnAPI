@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import logging
 from collections.abc import Mapping
 from typing import Any
@@ -166,7 +167,13 @@ class InstantOnConfigFlow(ConfigFlow, domain=DOMAIN):
                 data_updates={CONF_REFRESH_TOKEN: self._refresh_token},
             )
         if not self._sites:
-            return self.async_abort(reason="no_sites")
+            # Nothing to set up; don't leave the new session open.
+            auth = InstantOnAuth(async_create_clientsession(self.hass), self._refresh_token)
+            with contextlib.suppress(InstantOnError):
+                await auth.revoke()
+            return self.async_abort(
+                reason="no_sites", description_placeholders={"username": self._username or ""}
+            )
         return await self.async_step_options()
 
     # -- initial setup --------------------------------------------------------
