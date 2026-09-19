@@ -1,6 +1,10 @@
 {
   "domain": "instant_on",
   "name": "HPE Aruba Networking Instant On (Unofficial)",
+  "after_dependencies": [
+    "frontend",
+    "panel_custom"
+  ],
   "codeowners": [
     "@scetep"
   ],
@@ -17,9 +21,5 @@
     "custom_components.instant_on"
   ],
   "requirements": [],
-  "version": "0.1.0",
-  "after_dependencies": [
-    "frontend",
-    "panel_custom"
-  ]
+  "version": "0.1.0"
 }
