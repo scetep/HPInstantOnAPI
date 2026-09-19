@@ -6,9 +6,7 @@
   ],
   "config_flow": true,
   "dependencies": [
-    "frontend",
     "http",
-    "panel_custom",
     "websocket_api"
   ],
   "documentation": "https://github.com/scetep/HPInstantOnAPI",
@@ -19,5 +17,9 @@
     "custom_components.instant_on"
   ],
   "requirements": [],
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "after_dependencies": [
+    "frontend",
+    "panel_custom"
+  ]
 }

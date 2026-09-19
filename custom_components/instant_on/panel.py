@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 from typing import Any
 
@@ -14,6 +15,7 @@ from homeassistant.helpers import area_registry as ar
 from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers.dispatcher import async_dispatcher_connect
+from homeassistant.setup import async_setup_component
 
 from .const import DOMAIN, SIGNAL_ENTRIES_CHANGED
 from .coordinator import SiteData, normalize_mac
@@ -24,6 +26,8 @@ STATIC_URL = "/instant_on_static"
 FRONTEND_DIR = Path(__file__).parent / "frontend"
 DATA_PANEL = f"{DOMAIN}_panel"
 
+_LOGGER = logging.getLogger(__name__)
+
 
 async def async_setup_panel_support(hass: HomeAssistant) -> None:
     """Static files and websocket commands (once per HA run)."""
@@ -33,9 +37,15 @@ async def async_setup_panel_support(hass: HomeAssistant) -> None:
     websocket_api.async_register_command(hass, ws_subscribe_topology)
 
 
-async def async_register_panel(hass: HomeAssistant, version: str) -> None:
+async def async_register_panel(hass: HomeAssistant, version: str) -> bool:
+    """Add the map to the sidebar; the integration works fine without it."""
     if hass.data.get(DATA_PANEL):
-        return
+        return True
+    if "panel_custom" not in hass.config.components and not await async_setup_component(
+        hass, "panel_custom", {}
+    ):
+        _LOGGER.warning("Frontend is unavailable, so the Instant On network map is not shown")
+        return False
     hass.data[DATA_PANEL] = True
     await panel_custom.async_register_panel(
         hass,
@@ -46,6 +56,7 @@ async def async_register_panel(hass: HomeAssistant, version: str) -> None:
         module_url=f"{STATIC_URL}/instant-on-panel.js?v={version}",
         require_admin=True,
     )
+    return True
 
 
 @callback

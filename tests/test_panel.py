@@ -16,6 +16,18 @@ from custom_components.instant_on.const import DOMAIN
 from .test_init import WIRED_MAC, _setup
 
 
+async def test_setup_without_frontend(hass: HomeAssistant, fake_api, config_entry) -> None:
+    """Entities still work when the frontend (and so the map) is unavailable."""
+    from unittest.mock import AsyncMock, patch
+
+    with patch(
+        "custom_components.instant_on.panel.async_setup_component", AsyncMock(return_value=False)
+    ):
+        await _setup(hass, config_entry)
+    assert "instant-on" not in hass.data.get(DATA_PANELS, {})
+    assert hass.states.get("sensor.test_site_clients_online").state == "46"
+
+
 async def test_panel_registered_and_removed(hass: HomeAssistant, fake_api, config_entry) -> None:
     await _setup(hass, config_entry)
     panel = hass.data[DATA_PANELS]["instant-on"]
